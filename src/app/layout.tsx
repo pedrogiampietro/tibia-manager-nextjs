@@ -64,23 +64,18 @@ export default async function RootLayout({
       <body className={`${inter.className} bg-background text-foreground`} suppressHydrationWarning>
         <Provider>
           <div className="fixed top-0 left-0 right-0 bg-secondary border-b border-border z-10">
-            <div className="container mx-auto px-4">
+            <div className="col-span-12 mb-8 px-4 mx-auto">
               <div className="h-16 flex items-center justify-between">
 
                 <div className="flex md:hidden">
                   <MobileMenu />
                 </div>
-                <Link
-                  href="/download"
-                  className="items-center gap-2 text-primary hover:text-primary/90 transition-colors md:flex hidden"
-                >
-                  <Download className="h-5 w-5" />
-                  Download
-                </Link>
 
-                <div className="flex flex-col items-center leading-tight">
-                  <span className="text-sm text-muted-foreground">PLAYERS ONLINE</span>
-                  <span className="text-xl font-bold text-primary">{countOnline}</span>
+                <div className="flex flex-1 justify-center">
+                  <div className="flex flex-col items-center leading-tight bg-background/50 px-6 py-2 rounded-b-xl border-x border-b border-border">
+                    <span className="text-sm text-muted-foreground font-medium">PLAYERS ONLINE</span>
+                    <span className="text-2xl font-bold text-primary">{countOnline}</span>
+                  </div>
                 </div>
 
                 <div className="gap-3 md:flex hidden">
@@ -109,7 +104,6 @@ export default async function RootLayout({
               </div>
             </div>
           </div>
-
           <div className="pt-16">
             <SidebarProvider>
               <Sidebar variant="inset" className="bg-sidebar border-r border-sidebar-border w-72 md:block hidden">
