@@ -72,7 +72,7 @@ export default async function RootLayout({
                 </div>
                 <Link
                   href="/download"
-                  className="flex items-center gap-2 text-primary hover:text-primary/90 transition-colors md:flex hidden"
+                  className="items-center gap-2 text-primary hover:text-primary/90 transition-colors md:flex hidden"
                 >
                   <Download className="h-5 w-5" />
                   Download
@@ -141,7 +141,7 @@ export default async function RootLayout({
                 </SidebarContent>
                 <SidebarFooter className="p-6 border-t border-sidebar-border">
                   <span className="flex justify-center text-sm text-sidebar-primary-foreground">Pedrozera!</span>
-                </SidebarFooter>
+              </SidebarFooter>
               </Sidebar>
               <SidebarInset>
                 <ScrollArea className="h-screen w-full px-4 md:px-6 py-8">

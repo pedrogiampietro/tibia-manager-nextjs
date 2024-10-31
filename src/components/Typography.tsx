@@ -22,7 +22,7 @@ const typographyPropsVariants = cva(
 				overline: "text-sm font-medium leading-5 tracking-tight",
 			},
 			colorText: {
-				default: "text-gray-900 dark:text-gray-50",
+				default: "text-gray-400 dark:text-gray-50",
 				primary: "text-blue-600 dark:text-blue-400",
 				secondary: "text-gray-600 dark:text-gray-400",
 				disabled: "text-gray-400 dark:text-gray-600",

@@ -14,7 +14,7 @@ export default async function LoginBox() {
         <div className='bg-background/10 shadow rounded-md p-1 backdrop-blur-[6px]'>
           <div className='flex flex-row gap-2'>
             <div className='flex flex-col flex-grow space-y-1'>
-              <Button asChild variant={'blue'}>
+              <Button asChild>
                 <Link href={'/account-manager/login'}>Login</Link>
               </Button>
               <Button asChild size={'sm'}>
@@ -38,7 +38,7 @@ export default async function LoginBox() {
               </Button>
             )}
 
-            <Button asChild variant={'blue'}>
+            <Button asChild>
               <Link href={'/account-manager/'}>My Account</Link>
             </Button>
             <LogoutButton />
