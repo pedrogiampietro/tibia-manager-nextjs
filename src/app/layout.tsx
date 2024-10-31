@@ -63,7 +63,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-background text-foreground`} suppressHydrationWarning>
         <Provider>
-          <div className="fixed top-0 left-0 right-0 bg-secondary border-b border-border z-10">
+          <div className="fixed top-0 left-0 right-0 md:left-[280px] bg-secondary border-b border-border z-10">
             <div className="col-span-12 mb-8 px-4 mx-auto">
               <div className="h-16 flex items-center justify-between">
 
@@ -103,8 +103,7 @@ export default async function RootLayout({
                 </div>
               </div>
             </div>
-          </div>
-          <div className="pt-16">
+          </div>          <div className="pt-16">
             <SidebarProvider>
               <Sidebar variant="inset" className="bg-sidebar border-r border-sidebar-border w-72 md:block hidden">
                 <SidebarHeader className="p-6">
