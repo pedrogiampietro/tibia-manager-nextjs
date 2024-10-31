@@ -83,7 +83,7 @@ export default async function RootLayout({
                   <span className="text-xl font-bold text-primary">{countOnline}</span>
                 </div>
 
-                <div className="flex gap-3 md:flex hidden">
+                <div className="gap-3 md:flex hidden">
                   <Link href="#" className="block w-8 h-6 rounded overflow-hidden hover:opacity-80 transition-opacity">
                     <img
                       src="https://flagcdn.com/pl.svg"
@@ -141,10 +141,10 @@ export default async function RootLayout({
                 </SidebarContent>
                 <SidebarFooter className="p-6 border-t border-sidebar-border">
                   <span className="flex justify-center text-sm text-sidebar-primary-foreground">Pedrozera!</span>
-              </SidebarFooter>
+                </SidebarFooter>
               </Sidebar>
               <SidebarInset>
-                <ScrollArea className="h-screen w-full px-4 md:px-6 py-8">
+                <ScrollArea className="h-screen w-full px-4 md:px-12 py-8">
                   <div className='grid sm:grid-cols-12 sm:gap-6 grid-cols-1 mx-auto max-w-screen-xl'>
                     <div className='col-span-12 mb-8'>
                       <div className='flex justify-center items-center'>

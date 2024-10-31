@@ -131,61 +131,110 @@ export default async function Dashboard({ params, searchParams }: Params) {
 
   return (
     <>
-      <Card>
-        <CardHeader className="border-b">
-          <CardTitle>Account Manager</CardTitle>
-        </CardHeader>
+    <Card className="bg-card text-foreground border border-border">
+  <CardHeader className="border-b border-border">
+    <CardTitle>Account Manager</CardTitle>
+  </CardHeader>
 
-        <div className="p-2 space-y-2">
-          <div className="rounded-sm border">
-
-            <div className="p-2 flex sm:flex-row sm:justify-between gap-2">
-
-              <div className="flex-grow">
-                <div className='flex p-2 items-start justify-start  bg-gray-100 text-sm rounded-sm mb-2'>
-                  Account Status
-                </div>
-                <div className="flex items-center gap-2 leading-none">
-                  {acc?.premdays ? <Image src={'/account/status_green.gif'} width={32} height={32} alt="Premium" /> : <Image src={'/account/status_red.gif'} width={32} height={32} alt="Free" />}
-                  <div>
-                    {acc?.premdays ? (
-                      <>
-                        <Typography variant={"h6"} className="text-green-500 leading-none" >Premium Account</Typography>
-                        <Typography variant={"overline"} className="text-sm leading-none">( Balance of Premium Time: <strong>{acc?.premdays}</strong> days )</Typography>
-                      </>
-                    ) : (
-                      <>
-                        <Typography variant={"h6"} className="text-red-500" >Free Account</Typography>
-                        <Typography variant={"overline"} className="text-sm">To benefit from our great premium features, get Premium Time for your account.</Typography>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-1">
-                {user?.role === 'admin' && (
-                  <Button variant={'destructive'} className="whitespace-nowrap" asChild>
-                    <Link href={'/account-manager/admin'}>Admin Panel</Link>
-                  </Button>
-                )}
-                <Button className="whitespace-nowrap" asChild><Link href={'/shop'}>Shop</Link></Button>
-                <LogoutButton />
-              </div>
-
-            </div>
-            {!acc.key && (
-              <div className="p-2 pt-0">
-                <Alert variant={'destructive'} className="rounded-sm">
-                  <AlertTitle>Warning!</AlertTitle>
-                  <AlertDescription>
-                    <div className="flex flex-row gap-2">
-                      <div>You account is not register <Link href={'/account-manager'} className="font-bold text-blue-600" >Recovery Key</Link>.</div>
-                    </div>
-                  </AlertDescription>
-                </Alert>
-              </div>
+  <div className="p-2 space-y-2">
+    <div className="rounded-sm border border-panel">
+      <div className="p-2 flex sm:flex-row sm:justify-between gap-2 bg-panel">
+        <div className="flex-grow">
+          <div className="flex p-2 items-start justify-start bg-muted text-muted-foreground text-sm rounded-sm mb-2">
+            Account Status
+          </div>
+          <div className="flex items-center gap-2 leading-none">
+            {acc?.premdays ? (
+              <Image
+                src="/account/status_green.gif"
+                width={32}
+                height={32}
+                alt="Premium"
+              />
+            ) : (
+              <Image
+                src="/account/status_red.gif"
+                width={32}
+                height={32}
+                alt="Free"
+              />
             )}
+            <div>
+              {acc?.premdays ? (
+                <>
+                  <Typography
+                    variant="h6"
+                    className="text-success leading-none"
+                  >
+                    Premium Account
+                  </Typography>
+                  <Typography
+                    variant="overline"
+                    className="text-sm leading-none"
+                  >
+                    ( Balance of Premium Time:{" "}
+                    <strong>{acc?.premdays}</strong> days )
+                  </Typography>
+                </>
+              ) : (
+                <>
+                  <Typography variant="h6" className="text-error">
+                    Free Account
+                  </Typography>
+                  <Typography variant="overline" className="text-sm">
+                    To benefit from our great premium features, get Premium Time
+                    for your account.
+                  </Typography>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-1">
+          {user?.role === "admin" && (
+            <Button
+              variant="destructive"
+              className="whitespace-nowrap bg-destructive text-destructive-foreground"
+              asChild
+            >
+              <Link href="/account-manager/admin">Admin Panel</Link>
+            </Button>
+          )}
+          <Button
+            className="whitespace-nowrap bg-primary text-primary-foreground"
+            asChild
+          >
+            <Link href="/shop">Shop</Link>
+          </Button>
+          <LogoutButton />
+        </div>
+      </div>
+
+      {!acc.key && (
+        <div className="p-2 pt-0">
+          <Alert
+            variant="destructive"
+            className="rounded-sm bg-alert text-alert-foreground"
+          >
+            <AlertTitle>Warning!</AlertTitle>
+            <AlertDescription>
+              <div className="flex flex-row gap-2">
+                <div>
+                  Your account is not registered.{" "}
+                  <Link
+                    href="/account-manager"
+                    className="font-bold text-primary"
+                  >
+                    Recovery Key
+                  </Link>
+                  .
+                </div>
+              </div>
+            </AlertDescription>
+          </Alert>
+        </div>
+      )}
           </div>
         </div>
 
@@ -207,7 +256,7 @@ export default async function Dashboard({ params, searchParams }: Params) {
 
 
         <Tabs defaultValue={InitialTab} className="p-2 pt-0 rounded-sm" activationMode="manual">
-          <TabsList className="w-full border-[1px] rounded-sm bg-gray-100">
+          <TabsList className="w-full border-[1px] rounded-sm bg-sidebar-primary">
             <TabsTrigger value="status" className="rounded-sm">Status</TabsTrigger>
             <TabsTrigger value="account" className="rounded-sm">Account</TabsTrigger>
             <TabsTrigger value="history" className="rounded-sm">History</TabsTrigger>
@@ -219,7 +268,7 @@ export default async function Dashboard({ params, searchParams }: Params) {
             <div className="space-y-2">
               <div className="space-y-2">
                 <div className="flex flex-col rounded-sm border">
-                  <div className='flex p-2 items-start justify-start  bg-gray-100 text-sm border-b'>
+                  <div className='flex p-2 items-start justify-start bg-muted text-sm text-white border-b'>
                     General Information
                   </div>
                   <Table>
@@ -311,7 +360,7 @@ export default async function Dashboard({ params, searchParams }: Params) {
 
               <div className="space-y-2">
                 <div className="flex flex-col rounded-sm border">
-                  <div className='flex p-2 items-start justify-start  bg-gray-100 text-sm border-b'>
+                  <div className='flex p-2 items-start justify-start bg-muted text-sm border-b'>
                     Account Information
                   </div>
                   <Table>
@@ -386,7 +435,7 @@ export default async function Dashboard({ params, searchParams }: Params) {
               </div>
 
               <div className="flex flex-col rounded-sm border">
-                <div className='flex p-2 items-center justify-between bg-gray-100 text-sm border-b'>
+                <div className='flex p-2 items-center justify-between bg-muted text-sm border-b'>
                   Social media
                 </div>
                 <Table>

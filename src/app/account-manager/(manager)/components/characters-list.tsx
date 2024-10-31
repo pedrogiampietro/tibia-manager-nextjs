@@ -35,7 +35,7 @@ export default function CharactersList({ chars = [], playerOnline = [] }: IProps
     <>
       <section>
         <div className="flex flex-col rounded-sm border">
-          <div className='flex p-2 items-center justify-between bg-gray-100 text-sm border-b'>
+          <div className='flex p-2 items-center justify-between bg-muted text-sm text-white border-b'>
             Characters
           </div>
           <Table>

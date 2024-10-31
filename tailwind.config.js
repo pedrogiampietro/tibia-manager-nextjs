@@ -69,6 +69,18 @@ module.exports = {
 			light: '#ffffff',
 			dark: '#121212',
 		  },
+		  success: {
+			DEFAULT: '#28a745',
+			foreground: '#ffffff',
+		  },
+		  error: {
+			DEFAULT: '#dc3545', 
+			foreground: '#ffffff',
+		  },
+		  alert: {
+			DEFAULT: '#ffe5e5', 
+			foreground: '#dc3545',
+		  },
 		},
 		borderRadius: {
 		  lg: 'var(--radius)',
