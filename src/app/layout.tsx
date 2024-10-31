@@ -36,6 +36,7 @@ import {
 import { Download, Menu } from 'lucide-react';
 import { getSeverConfig, status, totalOnline } from '@/lib/server-utils';
 import MobileMenu from '@/components/mobile-menu';
+import Image from 'next/image';
 
 const lua = configLua()
 
@@ -71,7 +72,7 @@ export default async function RootLayout({
                   <MobileMenu />
                 </div>
 
-                <div className="flex flex-1 justify-center">
+                <div className="flex flex-1 justify-center md:ml-[120px]">
                   <div className="flex flex-col items-center leading-tight bg-background/50 px-6 py-2 rounded-b-xl border-x border-b border-border">
                     <span className="text-sm text-muted-foreground font-medium">PLAYERS ONLINE</span>
                     <span className="text-2xl font-bold text-primary">{countOnline}</span>
@@ -103,7 +104,8 @@ export default async function RootLayout({
                 </div>
               </div>
             </div>
-          </div>          <div className="pt-16">
+          </div>          
+          <div className="pt-16">
             <SidebarProvider>
               <Sidebar variant="inset" className="bg-sidebar border-r border-sidebar-border w-72 md:block hidden">
                 <SidebarHeader className="p-6">
@@ -142,9 +144,8 @@ export default async function RootLayout({
                     <div className='col-span-12 mb-8'>
                       <div className='flex justify-center items-center'>
                         <Link href="/">
-                          <video className='w-full max-w-[380px]' autoPlay muted playsInline loop>
-                            <source src="/movies/logo.webm" type="video/webm" />
-                          </video>
+                          <Image src="/logo.gif" alt="Logo Server" width={380} height={380} className='w-full max-w-[380px]'>
+                          </Image>
                         </Link>
                       </div>
                     </div>

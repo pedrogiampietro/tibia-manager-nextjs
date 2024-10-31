@@ -63,7 +63,6 @@ export default async function Casts({ searchParams }: { searchParams?: { search?
                           <span><b>{player.name}</b></span>
                           <span><b>Level: </b> {player.level}</span>
                           <span><b>Vocation: </b>{getVocation(player.vocation)}</span>
-                          {/* <span><b>World:</b> Tibia Gods</span> */}
                         </div>
                       </TableCell>
                       <TableCell className="w-[180px] space-y-2 items-start justify-start">
