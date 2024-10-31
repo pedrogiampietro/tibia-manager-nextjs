@@ -182,7 +182,7 @@ export default async function RootLayout({
 
                       <div className='flex justify-between p-4 bg-card shadow-lg rounded-lg'>
                         <Typography variant={'overline'} className='text-card-foreground text-xs md:text-sm'>
-                          © Progamo Ltda.
+                          © HypeOT 2019-2024. All rights reserved.
                         </Typography>
                         <Typography variant={'overline'} className='text-card-foreground text-xs md:text-sm'>
                           <Link href='#' className="hover:text-primary transition-colors">
