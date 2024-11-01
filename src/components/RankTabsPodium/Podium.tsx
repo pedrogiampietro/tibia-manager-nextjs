@@ -37,7 +37,7 @@ export function Podium({ data }: { data: RankItem[] }) {
                 Level {item?.level || "N/A"}
               </div>
             </div>
-            <div className={`w-full bg-primary rounded-t-md ${podiumHeight}`}></div>
+            <div className={`w-20 bg-primary rounded-t-md ${podiumHeight}`}></div>
           </div>
         );
       })}
