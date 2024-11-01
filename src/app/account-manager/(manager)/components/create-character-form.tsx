@@ -21,6 +21,7 @@ export function CharacterForm() {
   const router = useRouter()
 
   const [showNewTeamDialog, setShowNewTeamDialog] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const characterFormSchema = z.object({
     name: z.string().nonempty(),
@@ -45,6 +46,7 @@ export function CharacterForm() {
 
   async function onSubmit(data: CharacterFormValues) {
     try {
+      setIsLoading(true)
       const response = await fetch("/api/accounts/players", {
         method: "POST",
         headers: {
@@ -80,6 +82,8 @@ export function CharacterForm() {
 
     } catch (error) {
       reset()
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -90,7 +94,10 @@ export function CharacterForm() {
 
   return (
     <>
-      <Button size={'sm'} onClick={() => setShowNewTeamDialog(true)}>New Character</Button>
+      <Button size={'sm'} onClick={() => setShowNewTeamDialog(true)} disabled={isLoading}>
+        {isLoading ? (<Icon icon="eos-icons:loading" className="h-4 w-4 animate-spin mr-2" />) : null}
+        New Character
+      </Button>
 
       {showNewTeamDialog && (
         <Dialog open={showNewTeamDialog} onOpenChange={handle}>
@@ -101,7 +108,7 @@ export function CharacterForm() {
               </DialogHeader>
 
               <div className="flex flex-row justify-between items-center space-x-2 rounded-md border p-2 leading-none text-sm">
-                Please choose a name and gender for your character. If you can&apos;t think of any fanciful name. In any case, the name must not violate the naming conventions established in the Tibia Rules, or your character may be deleted or the name blocked.
+                Please choose a name and gender for your character. If you can't think of any fanciful name. In any case, the name must not violate the naming conventions established in the Tibia Rules, or your character may be deleted or the name blocked.
               </div>
 
               <div className="grid gap-4 py-2">
@@ -110,7 +117,7 @@ export function CharacterForm() {
                     label="Character Name"
                     name="name"
                     type="text"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || isLoading}
                   />
                   <RHFSelect
                     LabelOption={'label'} keyValue={'value'}
@@ -118,7 +125,7 @@ export function CharacterForm() {
                     options={[{ value: '0', label: 'Female' }, { value: '1', label: 'Male' }]}
                     name="sex"
                     defaultValue={'0'}
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || isLoading}
                   />
 
                   <div className="flex flex-row justify-between items-center space-x-2 rounded-md border p-2 leading-none">
@@ -132,15 +139,15 @@ export function CharacterForm() {
               </div>
               <DialogFooter>
                 <Button
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isLoading}
                   onClick={() => {
                     reset()
                     setShowNewTeamDialog(false)
                   }}
                   variant='outline'
                 >Cancel</Button>
-                <Button disabled={isSubmitting} type="submit">
-                  {isSubmitting ? (<Icon icon="eos-icons:loading" className="h-4 w-4 animate-spin" />) : 'Create'}
+                <Button disabled={isSubmitting || isLoading} type="submit">
+                  {isSubmitting || isLoading ? (<Icon icon="eos-icons:loading" className="h-4 w-4 animate-spin" />) : 'Create'}
                 </Button>
               </DialogFooter>
             </FormProvider>

@@ -17,7 +17,7 @@ export default async function LoginBox() {
               <Button asChild>
                 <Link href={'/account-manager/login'}>Login</Link>
               </Button>
-              <Button asChild size={'sm'}>
+              <Button variant="outline" asChild size='sm' className="border border-primary">
                 <Link href={'/account-manager/register'}>Create Account</Link>
               </Button>
             </div>

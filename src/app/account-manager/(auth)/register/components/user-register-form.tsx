@@ -32,25 +32,26 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
   const { toast } = useToast()
 
   const loginFormSchema = z.object({
-    accountName: z.string(),
-    email: z.string().email(),
-    password: z.string().min(8, 'A senha deve ter no mínimo 8 caracteres')
-      .and(passwordUppercase)
-      .and(passwordLowercase)
-      .and(passwordDigit)
-      .and(passwordSpecialChar),
-    passwordConfirm: z.string().min(8, 'A senha deve ter no mínimo 8 caracteres')
-      .and(passwordUppercase)
-      .and(passwordLowercase)
-      .and(passwordDigit)
-      .and(passwordSpecialChar),
-    characterName: z.string(),
-    gender: z.string(),
+    accountName: z.string().nonempty('Account Name is required'),
+    email: z.string().email('Invalid email address'),
+    password: z.string()
+      .min(8, 'Password must be at least 8 characters')
+      .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+      .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+      .regex(/\d/, 'Password must contain at least one digit')
+      .regex(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/, 'Password must contain at least one special character'),
+    passwordConfirm: z.string(),
+    characterName: z.string().nonempty('Character Name is required'),
+    gender: z.string().nonempty('Gender is required'),
     wLocation: z.string().optional(),
     wType: z.string().optional(),
-    terms: z.boolean().default(false)
+    terms: z.boolean().refine(val => val === true, 'You must accept the terms'),
   })
-
+  .refine((data) => data.password === data.passwordConfirm, {
+    path: ['passwordConfirm'],
+    message: 'Passwords do not match',
+  });
+  
   type LoginFormValues = z.infer<typeof loginFormSchema>
 
   const methods = useForm<LoginFormValues>({
@@ -60,7 +61,8 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
     }
   })
 
-  const { handleSubmit, watch, formState: { isSubmitting } } = methods
+  const { handleSubmit, watch, formState: { isSubmitting, errors } } = methods;
+
 
   async function onSubmit(data: LoginFormValues) {
     fetch("/api/auth/register", {
@@ -102,7 +104,7 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
 
   return (
     <div className={cn("grid gap-4", className)} {...props}>
-      <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} >
+        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <RHFTextField
             name="accountName"
@@ -143,10 +145,11 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
             disabled={isSubmitting}
           />
           <RHFSelect
-            LabelOption={'label'} keyValue={'value'}
+            LabelOption="label"
+            keyValue="value"
             name="gender"
             label="Sex"
-            defaultValue={'0'}
+            defaultValue="0"
             options={sexOptions}
           />
         </div>
@@ -159,7 +162,7 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
                 <RadioGroupItem value="All" id="All" className="peer sr-only" />
                 <Label
                   htmlFor="All"
-                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-gray-900 [&:has([data-state=checked])]:border-gray-900 cursor-pointer"
+                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                 >
                   All
                 </Label>
@@ -173,7 +176,7 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
                 />
                 <Label
                   htmlFor="europe"
-                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-gray-900 [&:has([data-state=checked])]:border-gray-900 cursor-pointer"
+                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                 >
                   Europe
                 </Label>
@@ -182,7 +185,7 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
                 <RadioGroupItem value="north-america" id="north-america" className="peer sr-only" disabled />
                 <Label
                   htmlFor="north-america"
-                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-gray-900 [&:has([data-state=checked])]:border-gray-900 cursor-pointer"
+                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                 >
                   North America
                 </Label>
@@ -191,7 +194,7 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
                 <RadioGroupItem value="south-america" id="south-america" className="peer sr-only" disabled />
                 <Label
                   htmlFor="south-america"
-                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-gray-900 [&:has([data-state=checked])]:border-gray-900 cursor-pointer"
+                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                 >
                   South America
                 </Label>
@@ -206,7 +209,7 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
                 <RadioGroupItem value="pvp" id="pvp" className="peer sr-only" disabled />
                 <Label
                   htmlFor="pvp"
-                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-gray-900 [&:has([data-state=checked])]:border-gray-900 cursor-pointer"
+                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                 >
                   Optional PvP
                 </Label>
@@ -220,7 +223,7 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
                 />
                 <Label
                   htmlFor="open-pvp"
-                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-gray-900 [&:has([data-state=checked])]:border-gray-900 cursor-pointer"
+                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                 >
                   Open PvP
                 </Label>
@@ -229,7 +232,7 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
                 <RadioGroupItem value="retro-pvp" id="retro-pvp" className="peer sr-only" />
                 <Label
                   htmlFor="retro-pvp"
-                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-gray-900 [&:has([data-state=checked])]:border-gray-900 cursor-pointer"
+                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                 >
                   Retro Open PvP
                 </Label>
@@ -238,7 +241,7 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
                 <RadioGroupItem value="retro-hard-pvp" id="retro-hard-pvp" className="peer sr-only" disabled />
                 <Label
                   htmlFor="retro-hard-pvp"
-                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-gray-900 [&:has([data-state=checked])]:border-gray-900 cursor-pointer"
+                  className="flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                 >
                   Retro Hardcore PvP
                 </Label>
@@ -252,7 +255,7 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
             />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Button variant={'link'} asChild className="sm:order-1 order-2">
+            <Button variant="outline" asChild className="sm:order-1 order-2 border border-primary">
               <Link href="/account-manager/login" >
                 Back to login
               </Link>

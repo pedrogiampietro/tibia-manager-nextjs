@@ -140,7 +140,7 @@ export default async function RootLayout({
               </Sidebar>
               <SidebarInset>
                 <ScrollArea className="h-screen w-full px-4 md:px-12 py-8">
-                  <div className='grid sm:grid-cols-12 sm:gap-6 grid-cols-1 mx-auto max-w-screen-xl'>
+                  <div className='grid sm:grid-cols-12 sm:gap-6 grid-cols-1 mx-auto'>
                     <div className='col-span-12 mb-8'>
                       <div className='flex justify-center items-center'>
                         <Link href="/">

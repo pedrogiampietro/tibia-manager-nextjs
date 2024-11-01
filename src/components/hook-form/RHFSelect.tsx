@@ -1,50 +1,47 @@
+import { Controller, useFormContext } from 'react-hook-form';
+import { Select } from '../ui/select';
+import { Label } from '../ui/label';
+import React from 'react';
 
-import { Controller, useFormContext } from 'react-hook-form'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
-import { SelectProps } from '@radix-ui/react-select'
-import { Label } from '../ui/label'
+type IProps = {
+  name: string;
+  label?: string;
+  options: Array<{ value: string; label: string }>;
+};
 
-type RHFSelectProps<T> = {
-  name: string
-  options: T[]
-  label?: string
-  placeholder?: string
-  defaultValue?: string | undefined
-  keyValue: keyof T
-  LabelOption: keyof T
-} & SelectProps
+type Props = IProps & any
 
-export default function RHFSelect<T>({ name, options, label, defaultValue, placeholder, keyValue, LabelOption, ...other }: RHFSelectProps<T>) {
-  const { control } = useFormContext()
-  const inputId = `input-${name}`;
+export default function RHFSelect({ name, label, options, ...other }: Props) {
+  const { control } = useFormContext();
+  const selectId = React.useId();
+
   return (
     <Controller
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <div className="grid">
-          {label && (
-            <Label htmlFor={inputId} className='mb-2'>
-              {label}
-            </Label>
-          )}
+        <div className="flex flex-col gap-2 w-full">
+          {label && <Label htmlFor={selectId}>{label}</Label>}
           <Select
-            onValueChange={field.onChange}
-            defaultValue={defaultValue}
             {...other}
+            {...field}
+            id={selectId}
+            aria-invalid={!!error}
+            aria-describedby={`${selectId}-error`}
           >
-            <SelectTrigger id={inputId}>
-              <SelectValue placeholder={placeholder ? placeholder : `Select ${name}...`} id='inputId' className={placeholder ? 'opacity-20 [span]:text-gray-200' : ''} />
-            </SelectTrigger>
-            <SelectContent className='overflow-auto max-h-[206px]'>
-              {options?.map((item, index) => <SelectItem key={index} value={item[keyValue] as string}>{item[LabelOption] as string}</SelectItem>)}
-            </SelectContent>
+            {options.map((option: any) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
           </Select>
-          {(!!error) && (
-            <div className='text-sm text-red-500'>{error?.message}</div>
+          {error && (
+            <span id={`${selectId}-error`} className="text-red-500 text-sm">
+              {error.message}
+            </span>
           )}
         </div>
       )}
     />
-  )
+  );
 }
