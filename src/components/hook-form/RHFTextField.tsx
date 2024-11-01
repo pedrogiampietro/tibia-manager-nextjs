@@ -31,7 +31,7 @@ export default function RHFTextField({ name, label, ...other }: Props) {
             aria-describedby={`${inputId}-error`}
           />
           {error && (
-            <span id={`${inputId}-error`} className="text-red-500 text-sm">
+            <span id={`${inputId}-error`} className="text-primary text-sm">
               {error.message}
             </span>
           )}

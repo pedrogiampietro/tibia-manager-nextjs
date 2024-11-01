@@ -36,7 +36,7 @@ export default function RHFSelect({ name, label, options, ...other }: Props) {
             ))}
           </Select>
           {error && (
-            <span id={`${selectId}-error`} className="text-red-500 text-sm">
+            <span id={`${selectId}-error`} className="text-primary text-sm">
               {error.message}
             </span>
           )}
