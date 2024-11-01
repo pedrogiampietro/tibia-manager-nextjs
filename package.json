@@ -94,6 +94,9 @@
     "@types/paypal__checkout-server-sdk": "^1.0.8",
     "@types/qrcode": "^1.5.5",
     "@types/react-lazy-load-image-component": "^1.6.3",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.8",
     "prisma": "^5.9.1"
   }
 }
