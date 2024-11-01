@@ -48,21 +48,31 @@ const lua = configLua()
 
 export async function POST(req: Request) {
   try {
-    const emailProvider = new MailProvider()
+    const emailProvider = new MailProvider();
     const data = await CreateAccountSchema.parseAsync(await req.json());
-    const existsUser = await prisma.accounts.findFirst({ where: { OR: [{ name: data.name }, { email: data.email }] } });
+
+    const existsUser = await prisma.accounts.findFirst({
+      where: { OR: [{ name: data.name }, { email: data.email }] },
+    });
     if (existsUser) {
       return NextResponse.json({ error: "User already exists" }, { status: 400 });
     }
-    const existsPlayer = await prisma.players.findFirst({ where: { name: data.characterName } });
+
+    const existsPlayer = await prisma.players.findFirst({
+      where: { name: data.characterName },
+    });
     if (existsPlayer) {
       return NextResponse.json({ error: "Character already exists" }, { status: 400 });
     }
 
-    const findInitialPlayer = await prisma.players.findFirst({ where: { name: 'Rook Sample' } })
-    if (!findInitialPlayer) return NextResponse.json({ message: 'Initial Player not exist.' }, { status: 500 });
+    const findInitialPlayer = await prisma.players.findFirst({
+      where: { name: 'Rook Sample' },
+    });
+    if (!findInitialPlayer) {
+      return NextResponse.json({ message: 'Initial Player not exist.' }, { status: 500 });
+    }
 
-    const { id, account_id, ...restInitialPlayer } = findInitialPlayer || { id: undefined, account_id: undefined };
+    const { id, account_id, ...restInitialPlayer } = findInitialPlayer;
 
     await prisma.accounts.create({
       data: {
@@ -78,16 +88,16 @@ export async function POST(req: Request) {
             sex: data.gender === 'female' ? 0 : 1,
             world_id: +lua['worldId'],
             create_date: dayjs().unix(),
-          }
+          },
         },
         profile: {
           create: {
             gender: data.gender,
-          }
+          },
         },
         address: {
-          create: {}
-        }
+          create: {},
+        },
       },
     });
 
@@ -105,13 +115,13 @@ export async function POST(req: Request) {
       </div>
       `,
     });
-    NextResponse.json({}, { status: 200 });
 
+    return NextResponse.json({}, { status: 200 });
   } catch (error) {
+    console.error(error); // Log the error
     if (error instanceof ZodError) {
       return NextResponse.json({ message: error.issues[0].message }, { status: 400 });
     }
     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
-  return NextResponse.json(null, { status: 200 });
 }

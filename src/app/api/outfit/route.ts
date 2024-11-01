@@ -82,9 +82,6 @@ function generateCacheIfNeeded(): boolean {
       process.exit(1);
     }
 
-    console.log('FILE SYSTEM CACHE GENERATED');
-    console.log('Animation frames count in loaded outfits:', frameNumbers);
-
     return true;
   }
   return false;

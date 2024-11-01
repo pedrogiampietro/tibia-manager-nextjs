@@ -89,6 +89,7 @@ export function UseRegisterForm({ className, ...props }: UseRegisterFormProps) {
 
       } else {
         const { error } = await res.json();
+        console.log('res ->', res)
         toast({
           title: "Error:",
           variant: 'destructive',
