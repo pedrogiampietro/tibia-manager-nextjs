@@ -95,8 +95,8 @@ type RHFRadioGroupPaymentProps = {
 
 }
 export function RHFRadioGroupPayments({ name, options }: RHFRadioGroupPaymentProps) {
-  const { control } = useFormContext()
-  const inputId = React.useId()
+  const { control } = useFormContext();
+  const inputId = React.useId();
 
   return (
     <Controller
@@ -108,31 +108,37 @@ export function RHFRadioGroupPayments({ name, options }: RHFRadioGroupPaymentPro
           defaultValue={field.value}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 p-2"
         >
-          {
-            options.map((opt) => (<>
-              <div className="bg-[url('/shop/pmcid_icon_normal.png')] w-[150px] h-[147px] ">
-                <div className="flex flex-col hover:bg-[url('/shop/pmcid_icon_over.png')] w-[150px] h-[147px]">
-                  <RadioGroupItem value={opt.value} id={inputId} className="peer sr-only absolute" />
-                  <Label
-                    htmlFor={inputId}
-                    className="flex flex-col absolute w-[150px] h-[147px] peer-data-[state=checked]:bg-[url('/shop/pmcid_icon_selected.png')] [&:has([data-state=checked])]:bg-[url('/shop/pmcid_icon_selected.png')] peer-disabled:bg-[url('/shop/serviceid_deactivated.png')] cursor-pointer"
+          {options.map((opt) => (
+            <div className="relative w-[150px] h-[147px] bg-[url('/shop/pmcid_icon_normal.png')]">
+              <div className="flex flex-col hover:bg-[url('/shop/pmcid_icon_over.png')] w-full h-full">
+                <RadioGroupItem
+                  value={opt.value}
+                  id={inputId}
+                  className="peer sr-only absolute"
+                />
+                <Label
+                  htmlFor={inputId}
+                  className="absolute inset-0 flex flex-col w-full h-full peer-data-[state=checked]:bg-[url('/shop/pmcid_icon_selected.png')] [&:has([data-state=checked])]:bg-[url('/shop/pmcid_icon_selected.png')] peer-disabled:bg-[url('/shop/serviceid_deactivated.png')] cursor-pointer"
+                />
+                <div className="w-full h-full flex flex-col items-center pt-[24px]">
+                  <Image
+                    src={'/payments/paymentmethodcategory31.gif'}
+                    width={69}
+                    height={23}
+                    alt=""
+                    className="pt-14px"
                   />
-                  <div className="w-[150px] h-[147px] flex flex-col items-center pt-[24px] ">
-                    <Image src={'/payments/paymentmethodcategory31.gif'} width={69} height={23} alt={""} className="pt-14px" />
-                    <div className="text-white text-xs mt-6 text-[10pt]">{opt.title}</div>
-                    <div className="mt-4 text-center text-[8pt] text-gray-400">
-                      <div className="">User Process time:</div>
-                      <div>fast</div>
-                    </div>
+                  <div className="text-white text-xs mt-6 text-[10pt]">{opt.title}</div>
+                  <div className="mt-4 text-center text-[8pt] text-gray-400">
+                    <div>User Process time:</div>
+                    <div>fast</div>
                   </div>
                 </div>
               </div>
-
-            </>)
-            )
-          }
+            </div>
+          ))}
         </RadioGroup>
       )}
     />
-  )
+  );
 }
