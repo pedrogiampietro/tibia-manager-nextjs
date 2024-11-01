@@ -29,6 +29,7 @@ export default function RHFTextField({ name, label, ...other }: Props) {
             id={inputId}
             aria-invalid={!!error}
             aria-describedby={`${inputId}-error`}
+            className='border border-primary'
           />
           {error && (
             <span id={`${inputId}-error`} className="text-primary text-sm">

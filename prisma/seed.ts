@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 
 const password = encryptPassword('12345678Aa!');
 const key = randomKey();
+
 export const samplePlayer = [
 	{ id: 1, name: 'Rook Sample', group_id: 1, account_id: 1, level: 2, vocation: 0, health: 155, healthmax: 155, experience: 100, lookbody: 113, lookfeet: 115, lookhead: 95, looklegs: 39, looktype: 129, maglevel: 2, mana: 60, manamax: 60, manaspent: 5936, town_id: 1, comment: '', cap: 410, sex: 1, skill_club: 12, skill_club_tries: 155, skill_sword: 12, skill_sword_tries: 155, skill_axe: 12, skill_axe_tries: 155, skill_dist: 12, skill_dist_tries: 93, conditions: Buffer.from([]) },
 	{ id: 2, name: 'Sorcerer Sample', group_id: 1, account_id: 1, level: 8, vocation: 1, health: 185, healthmax: 185, experience: 4200, lookbody: 113, lookfeet: 115, lookhead: 95, looklegs: 39, looktype: 129, maglevel: 0, mana: 90, manamax: 90, manaspent: 0, town_id: 8, comment: '', cap: 470, sex: 1, skill_club: 10, skill_club_tries: 0, skill_sword: 10, skill_sword_tries: 0, skill_axe: 10, skill_axe_tries: 0, skill_dist: 10, skill_dist_tries: 0, conditions: Buffer.from([]) },
@@ -59,6 +60,19 @@ async function seed() {
 	await prisma.players.createMany({ data: samplePlayer, skipDuplicates: true });
 	await prisma.towns.createMany({ data: positions, skipDuplicates: true });
 
+
+	const existingCategories = await prisma.productsCategories.findMany();
+	if (existingCategories.length === 0) {
+	  await prisma.productsCategories.createMany({
+		data: [
+		  { id: 1, name: 'Coins', desc: 'Coins category' },
+		  { id: 2, name: 'Premium Time', desc: 'Premium Time category' },
+		],
+	  });
+	  console.log('Categories seeded successfully.');
+	} else {
+	  console.log('Categories already exist.');
+	}
 }
 
 seed()

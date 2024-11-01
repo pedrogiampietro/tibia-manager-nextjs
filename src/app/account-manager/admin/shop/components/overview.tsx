@@ -12,7 +12,7 @@ export function Overview({ data }: Props) {
   const CustomTooltip = ({ active, payload, label }: { active: boolean, payload: any[], label: string }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="border rounded-sm bg-gray-100/80 p-2">
+        <div className="border rounded-sm bg-muted/80 p-2">
           <p className="text-xs font-medium">Total: {payload[0].value.toLocaleString(undefined, { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol', })}</p>
         </div>
       );

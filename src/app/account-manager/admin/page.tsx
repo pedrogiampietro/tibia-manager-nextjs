@@ -37,7 +37,7 @@ export default async function AdminManager() {
     <>
 
       <div className="flex flex-col rounded-sm border">
-        <div className='flex p-2 items-center justify-between bg-gray-100 text-sm border-b'>
+        <div className='flex p-2 items-center justify-between bg-muted text-sm border-b'>
           General information
         </div>
         <Table>
@@ -60,7 +60,7 @@ export default async function AdminManager() {
           </TableBody>
         </Table>
 
-        <div className='flex p-2 items-center justify-between bg-gray-100 text-sm border-b border-t'>
+        <div className='flex p-2 items-center justify-between bg-muted text-sm border-b border-t'>
           Open Tickets
           <div className="flex flex-row gap-2 items-center">
             <Button variant={'outline'} className="bg-white hover:bg-slate-50 w-[24px] h-[24px] p-0" >
@@ -98,7 +98,7 @@ export default async function AdminManager() {
             </TableRow>
             <TableRow className="p-0">
               <TableCell colSpan={6} className="p-0">
-                <div className='flex p-2 items-center justify-between bg-gray-100 text-sm'>
+                <div className='flex p-2 items-center justify-between bg-muted text-sm'>
                   Pending Tickets
                   <div className="flex flex-row gap-2 items-center">
                     <Button variant={'outline'} className="bg-white hover:bg-slate-50 w-[24px] h-[24px] p-0" >

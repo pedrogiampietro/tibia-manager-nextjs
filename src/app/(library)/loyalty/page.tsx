@@ -13,7 +13,7 @@ export default function PremiumHistory() {
         </CardHeader>
         <CardContent className="p-2 space-y-2">
           <div className="flex flex-col rounded-sm border">
-            {/* <div className='flex p-2 items-center justify-between bg-gray-100 text-sm'>
+            {/* <div className='flex p-2 items-center justify-between bg-muted text-sm'>
               Loyalty
             </div> */}
             <TableEmptyState />

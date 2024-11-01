@@ -24,7 +24,7 @@ export default async function PremiumHistory() {
 
             <TabsContent value="server_info">
               <div className="flex flex-col rounded-sm border">
-                <div className='flex p-2 items-start justify-start  bg-gray-100 text-sm'>
+                <div className='flex p-2 items-start justify-start  bg-muted text-sm'>
                   Server Information
                 </div>
                 <Table>
@@ -56,7 +56,7 @@ export default async function PremiumHistory() {
 
             <TabsContent value="rates">
               <div className="flex flex-col rounded-sm border">
-                <div className='flex p-2 items-start justify-start  bg-gray-100 text-sm'>
+                <div className='flex p-2 items-start justify-start  bg-muted text-sm'>
                   Rates
                 </div>
                 <Table>
@@ -84,7 +84,7 @@ export default async function PremiumHistory() {
 
             <TabsContent value="pvp_information">
               <div className="flex flex-col rounded-sm border">
-                <div className='flex p-2 items-start justify-start  bg-gray-100 text-sm'>
+                <div className='flex p-2 items-start justify-start  bg-muted text-sm'>
                   PVP Information
                 </div>
                 <Table>
@@ -120,7 +120,7 @@ export default async function PremiumHistory() {
 
             <TabsContent value="stages">
               <div className="flex flex-col rounded-sm border">
-                <div className='flex p-2 items-start justify-start  bg-gray-100 text-sm'>
+                <div className='flex p-2 items-start justify-start  bg-muted text-sm'>
                   Stages
                 </div>
                 <Table>
@@ -170,7 +170,7 @@ export default async function PremiumHistory() {
 
             <TabsContent value="party_system">
               <div className="flex flex-col rounded-sm border">
-                <div className='flex p-2 items-start justify-start  bg-gray-100 text-sm'>
+                <div className='flex p-2 items-start justify-start  bg-muted text-sm'>
                   Party System
                 </div>
                 <Table className="text-center">

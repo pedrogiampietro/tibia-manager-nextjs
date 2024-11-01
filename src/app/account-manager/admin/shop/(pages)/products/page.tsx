@@ -30,7 +30,7 @@ export default async function AdminProducts() {
       </div>
 
       <div className='border rounded-sm'>
-        <div className='flex p-2 items-center justify-end bg-gray-100 text-sm border-b'>
+        <div className='flex p-2 items-center justify-end bg-muted text-sm border-b'>
           <div className="flex flex-row gap-2 items-center">
             <Button variant={'outline'} className="bg-white hover:bg-slate-50 w-[24px] h-[24px] p-0" >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">

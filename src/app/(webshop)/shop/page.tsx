@@ -109,7 +109,7 @@ export default function PremiumHistory() {
               <div className="border rounded-sm">
 
                 <div className="`transition-all duration-300 ease-in-out transform">
-                  <div className='flex p-2 items-center justify-between bg-gray-100 text-sm border-b '>
+                  <div className='flex p-2 items-center justify-between bg-muted text-sm border-b '>
                     <div className="flex gap-2 items-center">
                       <IconiFy icon={'healthicons:money-bag-outline'} />
                       Select Product
@@ -159,7 +159,7 @@ export default function PremiumHistory() {
                   )}
                 </div>
 
-                <div className='flex p-2 items-center justify-between bg-gray-100 text-sm border-b border-t'>
+                <div className='flex p-2 items-center justify-between bg-muted text-sm border-b border-t'>
                   <div className="flex gap-2 items-center">
                     <IconiFy icon={'fluent:payment-28-regular'} />
                     Select payment provider
@@ -175,7 +175,7 @@ export default function PremiumHistory() {
                     />
                   </>
                 )}
-                <div className='flex p-2 items-center justify-between bg-gray-100 text-sm border-b border-t'>
+                <div className='flex p-2 items-center justify-between bg-muted text-sm border-b border-t'>
                   <div className="flex gap-2 items-center">
                     Checkout
                   </div>

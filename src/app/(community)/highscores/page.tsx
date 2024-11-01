@@ -106,7 +106,7 @@ export default async function HighScores({
           </div>
 
           <div className='flex flex-col rounded-sm border'>
-            <div className='flex items-center justify-between bg-gray-100 p-2 text-sm'>
+            <div className='flex items-center justify-between bg-muted p-2 text-sm'>
               HighScores
               <Pagination totalPages={totalPage} />
             </div>
@@ -137,7 +137,7 @@ export default async function HighScores({
                       <TableCell className=''>
                         <Link
                           href={`/characters/${character.name}`}
-                          className='text-blue-500 hover:underline'
+                          className='text-white hover:underline'
                         >
                           {character.name}
                         </Link>

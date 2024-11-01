@@ -83,7 +83,7 @@ export function UserRecoveryForm({ className, ...props }: UserRecoveryFormProps)
 
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Button variant={'link'} asChild className="sm:order-1 order-2">
+          <Button variant="outline" asChild className="sm:order-1 order-2 border border-primary">
             <Link href="/account-manager/login" >
               Go to Login
             </Link>

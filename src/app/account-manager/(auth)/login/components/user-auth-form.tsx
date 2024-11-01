@@ -158,7 +158,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Button variant="outline" asChild className="sm:order-1 order-2">
+            <Button variant="outline" asChild className="sm:order-1 order-2 border border-primary">
               <Link href="/account-manager/recovery" >
                 Recovery Password
               </Link>
